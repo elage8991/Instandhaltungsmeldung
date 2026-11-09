@@ -1,0 +1,21 @@
+apiVersion: asset.sap/v1
+kind: Asset
+type: mcp-server
+
+metadata:
+  name: sap-s4-maintnotification-mcp-server
+  description: Exposes SAP S/4HANA maintenance notification operations (MaintenanceNotification, FunctionalLocation) as MCP tools via API_MAINTNOTIFICATION OData service.
+  version: "1.0.0"
+  translation: mcp-translation/translation.json
+  apiSpec: mcp-translation/api-spec.edmx
+
+provides:
+  apis:
+    - name: sap-s4-maintnotification-mcp-server
+      kind: mcp-server
+      ordId: customer.build:apiResource:instandhaltungsmeldung-b1607.sap-s4-maintnotification-mcp-server:v1
+
+requires:
+  - name: API_MAINTNOTIFICATION
+    kind: api
+    ordId: sap.s4:apiResource:API_MAINTNOTIFICATION:v1

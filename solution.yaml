@@ -1,0 +1,11 @@
+apiVersion: solution.sap/v1
+kind: Solution
+
+metadata:
+  name: instandhaltungsmeldung-b1607
+  version: "1.0.0"
+  description: AI-Agent der Nutzer im Dialog durch das Anlegen von SAP PM Instandhaltungsmeldungen fuehrt. Integriert mit API_MAINTNOTIFICATION fuer technische Platzsuche und Meldungsanlage.
+
+assets:
+  - ref: ./assets/instandhaltungsmeldung-agent/asset.yaml
+  - ref: ./assets/sap-s4-maintnotification-mcp-server/asset.yaml

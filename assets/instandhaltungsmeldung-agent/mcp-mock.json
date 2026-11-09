@@ -1,0 +1,286 @@
+{
+  "servers": {
+    "sap-s4-maintnotification": {
+      "mcp_server_name": "sap.mcp/cds_api_maintnotification",
+      "description": "MCP server for the cds_api_maintnotification service. Exposes SAP S/4HANA maintenance notification operations (MaintenanceNotification, LinearAssetManagementData).",
+      "tools": {
+        "get_metadata_cds_api_maintnotification": {
+          "description": "Retrieve OData service metadata for cds_api_maintnotification (schema discovery).",
+          "input_schema": {
+            "type": "object",
+            "properties": {},
+            "required": []
+          },
+          "mock_response": {
+            "metadata": "<edmx:Edmx Version=\"1.0\"><edmx:DataServices><Schema Namespace=\"cds_api_maintnotification\"></Schema></edmx:DataServices></edmx:Edmx>"
+          }
+        },
+        "batch_for_cds_api_maintnotification": {
+          "description": "Execute a batch request against the cds_api_maintnotification OData service.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "requests": {
+                "type": "string",
+                "description": "Batch request body"
+              }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "responses": []
+          }
+        },
+        "list_linearassetmanagementdata_for_cds_api_maintnotification": {
+          "description": "Retrieve a list of LinearAssetManagementData entries. Use this to search for functional locations (technische Plätze) by address or description.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$top": {
+                "type": "string",
+                "description": "Maximum number of results to return (max 100)"
+              },
+              "$filter": {
+                "type": "string",
+                "description": "OData filter expression, e.g. contains(FunctionalLocationName,'Beeskowdamm')"
+              },
+              "$select": {
+                "type": "string",
+                "description": "Comma-separated list of fields to return"
+              },
+              "$orderby": {
+                "type": "string",
+                "description": "Sort order"
+              },
+              "$skip": {
+                "type": "string",
+                "description": "Number of results to skip"
+              }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "FunctionalLocation": "ZTP-BEESKOW-001",
+                "FunctionalLocationName": "Beeskowdamm 3, Hauptgebäude",
+                "SuperiorFunctionalLocation": "ZTP-BEESKOW",
+                "Plant": "1000",
+                "Location": "Berlin",
+                "MaintPlant": "1000",
+                "FuncLocCategory": "M"
+              },
+              {
+                "FunctionalLocation": "ZTP-BEESKOW-002",
+                "FunctionalLocationName": "Beeskowdamm 3, Nebengebäude",
+                "SuperiorFunctionalLocation": "ZTP-BEESKOW",
+                "Plant": "1000",
+                "Location": "Berlin",
+                "MaintPlant": "1000",
+                "FuncLocCategory": "M"
+              }
+            ]
+          }
+        },
+        "get_linearassetmanagementdata_for_cds_api_maintnotification": {
+          "description": "Retrieve a single LinearAssetManagementData entry by key (functional location).",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "FunctionalLocation": {
+                "type": "string",
+                "description": "Functional location identifier"
+              }
+            },
+            "required": ["FunctionalLocation"]
+          },
+          "mock_response": {
+            "FunctionalLocation": "ZTP-BEESKOW-001",
+            "FunctionalLocationName": "Beeskowdamm 3, Hauptgebäude",
+            "SuperiorFunctionalLocation": "ZTP-BEESKOW",
+            "Plant": "1000",
+            "Location": "Berlin",
+            "MaintPlant": "1000",
+            "FuncLocCategory": "M"
+          }
+        },
+        "count_linearassetmanagementdata_for_cds_api_maintnotification": {
+          "description": "Count LinearAssetManagementData entries matching an optional filter.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$filter": {
+                "type": "string",
+                "description": "OData filter expression"
+              }
+            },
+            "required": []
+          },
+          "mock_response": 2
+        },
+        "list_maintenancenotification_for_cds_api_maintnotification": {
+          "description": "Retrieve a list of MaintenanceNotification entries.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$top": {
+                "type": "string",
+                "description": "Maximum number of results (max 100)"
+              },
+              "$filter": {
+                "type": "string",
+                "description": "OData filter expression"
+              },
+              "$select": {
+                "type": "string",
+                "description": "Fields to return"
+              },
+              "$orderby": {
+                "type": "string",
+                "description": "Sort order"
+              },
+              "$skip": {
+                "type": "string",
+                "description": "Number of results to skip"
+              }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "MaintenanceNotification": "10000001",
+                "NotifShortText": "Wasserschaden 2.OG Raum 204",
+                "FunctionalLocation": "ZTP-BEESKOW-001",
+                "Priority": "2",
+                "MaintNotifInternalID": "000010000001",
+                "NotificationStatus": "OSNO",
+                "CreationDate": "/Date(1744588800000)/",
+                "RequiredStartDate": "/Date(1744675200000)/",
+                "MaintNotifBreakdownIndicator": ""
+              }
+            ]
+          }
+        },
+        "create_maintenancenotification_for_cds_api_maintnotification": {
+          "description": "Create a new MaintenanceNotification in SAP S/4HANA.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "NotifShortText": {
+                "type": "string",
+                "description": "Short text description of the notification (max 40 characters)"
+              },
+              "FunctionalLocation": {
+                "type": "string",
+                "description": "Functional location identifier (ZTP)"
+              },
+              "Priority": {
+                "type": "string",
+                "description": "Priority: 1=Very High, 2=High, 3=Medium, 4=Low"
+              },
+              "MaintNotifLongTextForEdit": {
+                "type": "string",
+                "description": "Long text description of the notification"
+              },
+              "RequiredStartDate": {
+                "type": "string",
+                "description": "Required start date in SAP date format /Date(timestamp)/"
+              },
+              "MaintNotifBreakdownIndicator": {
+                "type": "string",
+                "description": "Breakdown indicator: X=Breakdown, empty=No Breakdown"
+              },
+              "MaintenanceNotificationType": {
+                "type": "string",
+                "description": "Notification type, e.g. M1"
+              }
+            },
+            "required": ["NotifShortText", "FunctionalLocation", "Priority"]
+          },
+          "mock_response": {
+            "MaintenanceNotification": "10000042",
+            "NotifShortText": "Wasserschaden 2.OG Raum 204",
+            "FunctionalLocation": "ZTP-BEESKOW-001",
+            "Priority": "2",
+            "MaintNotifInternalID": "000010000042",
+            "NotificationStatus": "OSNO",
+            "CreationDate": "/Date(1744588800000)/",
+            "RequiredStartDate": "/Date(1744675200000)/",
+            "MaintNotifBreakdownIndicator": ""
+          }
+        },
+        "update_maintenancenotification_for_cds_api_maintnotification": {
+          "description": "Update an existing MaintenanceNotification by key.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "MaintenanceNotification": {
+                "type": "string",
+                "description": "Notification number (key)"
+              },
+              "NotifShortText": {
+                "type": "string",
+                "description": "Updated short text"
+              },
+              "Priority": {
+                "type": "string",
+                "description": "Updated priority"
+              }
+            },
+            "required": ["MaintenanceNotification"]
+          },
+          "mock_response": {}
+        },
+        "get_maintenancenotification_for_cds_api_maintnotification": {
+          "description": "Retrieve a single MaintenanceNotification by its key.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "MaintenanceNotification": {
+                "type": "string",
+                "description": "Notification number (key)"
+              }
+            },
+            "required": ["MaintenanceNotification"]
+          },
+          "mock_response": {
+            "MaintenanceNotification": "10000042",
+            "NotifShortText": "Wasserschaden 2.OG Raum 204",
+            "FunctionalLocation": "ZTP-BEESKOW-001",
+            "Priority": "2",
+            "MaintNotifInternalID": "000010000042",
+            "NotificationStatus": "OSNO",
+            "CreationDate": "/Date(1744588800000)/",
+            "RequiredStartDate": "/Date(1744675200000)/",
+            "MaintNotifBreakdownIndicator": ""
+          }
+        },
+        "count_maintenancenotification_for_cds_api_maintnotification": {
+          "description": "Count MaintenanceNotification entries matching an optional filter.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$filter": {
+                "type": "string",
+                "description": "OData filter expression"
+              }
+            },
+            "required": []
+          },
+          "mock_response": 1
+        }
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "created_for_agent": "instandhaltungsmeldung-agent",
+    "mock_mode": true,
+    "deterministic": true,
+    "total_servers": 1,
+    "total_tools": 10,
+    "generated_from": ["translation.json"],
+    "generation_date": "2026-11-09"
+  }
+}
